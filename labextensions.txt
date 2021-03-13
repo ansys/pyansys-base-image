@@ -1,0 +1,6 @@
+@jupyter-widgets/jupyterlab-manager@2.0
+itkwidgets@0.32.0
+jupyterlab-plotly@4.12.0
+plotlywidget@4.12.0
+ipycanvas@0.6.1
+ipyevents@1.8.1

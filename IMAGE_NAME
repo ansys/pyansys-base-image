@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# contains base image name version
+VERSION=v0.5.3
+IMAGE=mapdlhelm.azurecr.io/jupyterlab_base:$VERSION
