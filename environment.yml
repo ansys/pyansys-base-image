@@ -20,6 +20,7 @@ dependencies:
   - ipyevents=0.8.2
   - ipycanvas=0.8.2
   - dash-bootstrap-components=0.11.3
+  - pip=21.2.4
   - pip:
     - ipyvtk_simple==0.1.4
     - jupyter-cadquery==2.0.0
