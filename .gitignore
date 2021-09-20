@@ -2,3 +2,6 @@ NVIDIA-Linux*
 *.whl
 *~
 ipynb_checkpoints/
+
+# Secrets when running github actions locally with nektos/act
+.secrets
