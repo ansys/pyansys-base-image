@@ -1,5 +1,6 @@
 #!/bin/bash
 
 # contains base image name version
-VERSION=v0.6.2
-IMAGE=mapdlhelm.azurecr.io/jupyterlab_base:$VERSION
+REGISTRY=mapdlhelm.azurecr.io
+REPOSITORY=jupyterlab_base
+IMAGE=$REGISTRY/$REPOSITORY:dev

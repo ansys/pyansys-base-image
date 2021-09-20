@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    tags:
+    - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Read IMAGE_NAME
+        id: image_name
+        uses: falti/dotenv-action@v0.2.7 
+        with:
+          path: IMAGE_NAME
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build and Push
+        uses: docker/build-push-action@v2
+        with:
+          # push: ${{ github.event_name == 'tag' }} # sort out auth
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
