@@ -44,8 +44,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Test
-        run: |
-          docker run --rm -v `pwd`/test_notebooks:/test_notebooks ${{ env.TEST_TAG }} jupyter nbconvert --to html --execute $NOTEBOOKS --output-dir=/test_notebooks/out
+        run: >-
+          docker run --rm
+          -v `pwd`/test_notebooks:/test_notebooks
+          --user $(id -u):$(id -g) -e HOME=/tmp
+          ${{ env.TEST_TAG }}
+          jupyter nbconvert --to html --execute $NOTEBOOKS --output-dir=/test_notebooks/out
         env:
           # Need fix: cadquery.ipynb
           NOTEBOOKS: >-
