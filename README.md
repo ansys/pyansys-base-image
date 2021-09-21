@@ -21,8 +21,6 @@ It can be run locally by running the scripts in the following order:
 - run_image.sh
 
 #### Notes
- - We're currently using a custom image of pyvista at the moment, and
-   this needs to be upgraded to the latest pyvista release.
  - GPU image on dev.pyansys.com contains additional GPU remote
    rendering features not included in this image.  Ping @akaszynski to
    create that branch.

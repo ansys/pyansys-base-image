@@ -8,7 +8,7 @@ dependencies:
   - ipywidgets=7.6.3
   - pandas=1.2.3
   - ipygany=0.5.0
-  - pyvista=0.29.0
+  - pyvista=0.32.1
   - panel=0.11.0
   - plotly=4.14.3
   - cadquery=master
@@ -20,9 +20,9 @@ dependencies:
   - ipyevents=0.8.2
   - ipycanvas=0.8.2
   - dash-bootstrap-components=0.11.3
+  - ipyvtklink==0.2.1
   - pip=21.2.4
   - pip:
-    - ipyvtk_simple==0.1.4
     - jupyter-cadquery==2.0.0
     - dash-vtk==0.0.6
     - dash-treeview-antd==0.0.1

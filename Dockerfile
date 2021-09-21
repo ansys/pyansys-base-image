@@ -30,10 +30,6 @@ COPY environment.yml labextensions.txt /tmp/
 RUN mamba env update -n base --file /tmp/environment.yml
 RUN conda run jupyter labextension install $(cat /tmp/labextensions.txt)
 
-COPY pyvista-0.29.1-py3-none-any.whl pyvista-0.29.1-py3-none-any.whl 
-RUN pip install pyvista-0.29.1-py3-none-any.whl \
-    && rm pyvista-0.29.1-py3-none-any.whl
-
 # make jovyan sudo
 USER root
 RUN echo 'export PATH="/opt/conda/bin:$PATH"' >> /etc/profile

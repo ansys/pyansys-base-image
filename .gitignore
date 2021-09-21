@@ -2,6 +2,7 @@ NVIDIA-Linux*
 *.whl
 *~
 ipynb_checkpoints/
+test_notebooks/out
 
 # Secrets when running github actions locally with nektos/act
 .secrets
