@@ -41,8 +41,7 @@ jobs:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}:latest
       - name: Test
         run: >-
           docker run --rm
@@ -69,5 +68,5 @@ jobs:
           push: ${{ github.event_name == 'push' && contains(github.ref, '/tags/v') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}:latest
+          cache-to: type=inline
