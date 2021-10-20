@@ -6,13 +6,7 @@ pushing a git tag starting with `v`.
 
 The image is pushed to the github repository ghcr.io.
 
-Obtain docker login credentials by following the steps at:
-https://portal.azure.com/#@ansys.com/resource/subscriptions/2870ae10-53f8-46b1-8971-93761377c38b/resourceGroups/PyANSYS/providers/Microsoft.ContainerRegistry/registries/mapdlhelm
-
-It can be run locally by running the scripts in the following order:
-
-- build_image.sh
-- run_image.sh
+It can be run locally with `build_and_run_image.sh`
 
 #### Notes
  - GPU image on dev.pyansys.com contains additional GPU remote
