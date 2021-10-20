@@ -4,7 +4,7 @@ channels:
   - cadquery
   - plotly
 dependencies:
-  - jupyterlab=3.0.10
+  - jupyterlab=3.2.0
   - ipywidgets=7.6.3
   - pandas=1.2.3
   - ipygany=0.5.0
