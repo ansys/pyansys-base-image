@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# contains base image name version
-REGISTRY=ghcr.io
-REPOSITORY=pyansys/pyansys-base-image
-IMAGE=$REGISTRY/$REPOSITORY:dev
