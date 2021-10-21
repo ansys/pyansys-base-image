@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# contains base image name version
-REGISTRY=mapdlhelm.azurecr.io
-REPOSITORY=jupyterlab_base
-IMAGE=$REGISTRY/$REPOSITORY:dev

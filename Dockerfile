@@ -1,6 +1,6 @@
-FROM jupyter/base-notebook:python-3.8.8
+FROM jupyter/base-notebook:hub-1.4.2
 
-MAINTAINER Alex Kaszynski "alexander.kaszynski@ansys.com"
+MAINTAINER PyAnsys Maintainers "pyansys.maintainers@ansys.com"
 
 USER root
 

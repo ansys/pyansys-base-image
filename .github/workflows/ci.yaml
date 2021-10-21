@@ -7,7 +7,9 @@ on:
   pull_request:
 
 env:
-  TEST_TAG: user/myapp:test
+  TEST_TAG: pyansys-base-image:test
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -16,25 +18,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Read IMAGE_NAME
-        id: image_name
-        uses: falti/dotenv-action@v0.2.7 
-        with:
-          path: IMAGE_NAME
-      - name: Login to ${{ steps.image_name.outputs.registry }}
+          
+      - name: Login to ${{ env.REGISTRY }}
         uses: docker/login-action@v1
         with:
-          registry: ${{ steps.image_name.outputs.registry }}
-          username: ${{ secrets.REGISTRY_USER }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           github-token: ${{ github.token }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern=v{{major}}.{{minor}}.{{patch}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+        
       - name: Build and export to Docker
         uses: docker/build-push-action@v2
         with:
@@ -42,25 +48,21 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
           cache-from: type=registry,ref=${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}:latest
+          
       - name: Test
         run: >-
           docker run --rm
           -v `pwd`/test_notebooks:/test_notebooks
           --user $(id -u):$(id -g) -e HOME=/tmp
           ${{ env.TEST_TAG }}
-          jupyter nbconvert --to html --execute $NOTEBOOKS --output-dir=/test_notebooks/out
-        env:
-          # Need fix: cadquery.ipynb
-          NOTEBOOKS: >-
-            /test_notebooks/import-all.ipynb
-            /test_notebooks/ipygany.ipynb
-            /test_notebooks/ipyvtk-simple.ipynb
-            /test_notebooks/panel.ipynb
+          jupyter nbconvert --to html --execute /test_notebooks/* --output-dir=/test_notebooks/out
+            
       - name: Save notebook HTML out
         uses: actions/upload-artifact@v2
         with:
           name: test-notebooks-html-out
           path: test_notebooks/out/*.html
+          
       - name: Push the image
         uses: docker/build-push-action@v2
         with:
@@ -70,3 +72,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ steps.image_name.outputs.registry }}/${{ steps.image_name.outputs.repository }}:latest
           cache-to: type=inline
+          secrets: |
+            "github_token=${{ steps.get_workflow_token.outputs.token }}"
