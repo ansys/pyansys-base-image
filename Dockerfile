@@ -31,7 +31,7 @@ RUN mamba env update -n base --file /tmp/environment.yml
 
 # override vtk with custom VTK with OSMesa
 # don't uninstall VTK as cadquery depends on some of the libraries, but ignore it so we can keep then while getting the benefits for osmesa
-RUN pip install https://github.com/pyvista/pyvista-wheels/raw/feat/add_cp39_osmesa/vtk-osmesa-9.1.0-cp39-cp39-linux_x86_64.whl --ignore-installed
+RUN pip install https://github.com/pyvista/pyvista-wheels/raw/main/vtk-osmesa-9.1.0-cp39-cp39-linux_x86_64.whl --ignore-installed
 
 # make jovyan sudo
 USER root
