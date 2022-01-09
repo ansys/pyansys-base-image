@@ -21,7 +21,7 @@ dependencies:
   - panel=0.12.6
   - pip=21.3
   - plotly=5.4.0
-  - pyvista=0.32.1
+  - pyvista=0.33.0
   - pythreejs=2.3.0
   - pip:
     - jupyter-cadquery==2.2.1
