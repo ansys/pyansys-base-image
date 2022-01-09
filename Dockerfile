@@ -25,10 +25,9 @@ USER jovyan
 RUN conda update -n base conda
 RUN conda install mamba -n base -c conda-forge
 
-# install extensions
-COPY environment.yml labextensions.txt /tmp/
+# install enviornment
+COPY environment.yml /tmp/
 RUN mamba env update -n base --file /tmp/environment.yml
-RUN conda run jupyter labextension install $(cat /tmp/labextensions.txt)
 
 # override vtk with custom VTK with OSMesa
 # don't uninstall VTK as cadquery depends on some of the libraries, but ignore it so we can keep then while getting the benefits for osmesa
