@@ -10,4 +10,5 @@ docker run -it --rm \
        -v /home/$USER/python:/mnt/python \
        -v /tmp:/mnt/tmp \
        -v `pwd`/test_notebooks:/home/jovyan/test_notebooks \
+       -e JUPYTER_ENABLE_LAB=yes \
        -p 8888:8888 "$IMAGE"
