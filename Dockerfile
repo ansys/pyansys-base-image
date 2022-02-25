@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook:hub-2.0.1
+FROM jupyter/base-notebook:lab-3.2.9
 
 MAINTAINER PyAnsys Maintainers "pyansys.maintainers@ansys.com"
 
